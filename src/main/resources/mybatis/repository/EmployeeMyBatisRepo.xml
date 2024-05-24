@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.rr_company.repository.EmployeeMyBatisRepo">
+
+    <select id="findAll" resultType="Employee">
+        SELECT <include refid="EmployeeColumns"></include>
+        FROM employee e;
+    </select>
+
+    <select id="getByEmployeeId" resultType="Employee">
+        SELECT <include refid="EmployeeColumns"></include>
+        FROM employee e
+        <where>
+            e.id = #{id}
+        </where>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO employee(name,
+                             surname,
+                             e_mail,
+                             department_id,
+                             position_id,
+                             status,
+                             created_at,
+                             updated_at
+        )
+        values(
+               #{name, jdbcType=NVARCHAR},
+               #{surname, jdbcType=NVARCHAR},
+               #{e_mail},
+               #{department_id},
+               #{position_id},
+               #{status},
+               #{created_at},
+               #{updated_at}
+              )
+    </insert>
+
+    <update id="update">
+        UPDATE crud.employee e
+        SET  e.name =#{name, jdbcType=NVARCHAR}
+        <where>
+            e.id = #{id}
+        </where>
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM crud.employee e
+        <where>
+            e.id =#{id}
+        </where>
+    </delete>
+
+
+    <sql id="EmployeeColumns">
+               e.id,
+               e.name,
+               e.surname,
+               e.e_mail,
+               e.department_id,
+               e.position_id,
+               e.status,
+               e.created_at,
+               e.updated_at
+
+    </sql>
+
+</mapper>

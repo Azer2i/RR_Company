@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.rr_company.repository.PositionMyBatisRepo">
+
+    <select id="getAllPosition" resultType="Position">
+        SELECT <include refid="PositionColumns"></include>
+         FROM positions p;
+    </select>
+
+    <select id="findByIdPosition" resultType="Position">
+        SELECT <include refid="PositionColumns"></include>
+        FROM positions p
+        <where>
+            p.id = #{id}
+        </where>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO positions(name,
+                              salary,
+                              created_at,
+                              updated_at,
+                              department_id)
+        VALUES(#{name,jdbcType=NVARCHAR},
+               #{salary},
+               #{created_at},
+               #{updated_at},
+               #{department_id})
+    </insert>
+
+    <update id="update">
+        UPDATE crud.positions p
+        SET p.name =#{name,jdbcType=NVARCHAR} ,
+            p.salary =#{salary} ,
+            p.created_at=#{created_at},
+            p.updated_at=#{updated_at},
+            p.department_id=#{department_id}
+       <where>
+           p.id=#{id}
+       </where>
+    </update>
+
+    <delete id="delete">
+        DELETE FROM crud.positions p
+        <where>
+            p.id = #{id}
+        </where>
+    </delete>
+    
+    <select id="getPositionWithDepartment" resultType="Position">
+        SELECT position.*, department.name AS department_name, department.created_at, department.updated_at
+        FROM position
+        INNER JOIN department ON position.department_id = department.id
+    </select>
+
+
+
+        <sql id="PositionColumns">
+            p.id,
+            p.name,
+            p.salary,
+            p.created_at,
+            p.updated_at,
+            p.department_id
+        </sql>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</mapper>
