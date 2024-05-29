@@ -55,6 +55,32 @@
         </where>
     </delete>
 
+    <select id="getEmployeesWithDepartmentAndPosition" resultType="com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition">
+        SELECT
+            e.id,
+            e.name,
+            e.surname,
+            e.e_mail,
+            e.status,
+            e.created_at,
+            e.updated_at,
+            d.id AS departmentId,
+            d.name AS departmentName,
+            d.created_at AS departmentCreatedAt,
+            d.updated_at AS departmentUpdatedAt,
+            p.id AS positionId,
+            p.name AS positionName,
+            p.salary AS positionSalary,
+            p.created_at AS positionCreatedAt,
+            p.updated_at AS positionUpdatedAt
+        FROM
+            employee e
+                INNER JOIN
+            department d ON e.department_id = d.id
+                INNER JOIN
+            positions p ON e.position_id = p.id;
+    </select>
+
 
     <sql id="EmployeeColumns">
                e.id,

@@ -12,6 +12,6 @@ mybatis:
   mapper-locations: classpath:mybatis/repository/*.xml
   type-aliases-package: com.example.rr_company.model.entity
 
-#security:
-#  secret-key: ui4woWU7Cfda2dUk02f3mDd6IrMHZQ4oNF324dakdl
-#  expiration: 300000 #1000*60*5
+security:
+  secret-key: ui4woWU7Cfda2dUk02f3mDd6IrMHZQ4oNF324dakdl
+  expiration: 300000 #1000*60*5

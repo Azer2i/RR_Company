@@ -5,6 +5,7 @@ import com.example.rr_company.model.dto.request.EmployeeRequest;
 import com.example.rr_company.model.dto.response.EmployeeResponse;
 //import com.example.rr_company.model.request.EmployeeRequest;
 //import com.example.rr_company.model.response.EmployeeResponse;
+import com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition;
 import com.example.rr_company.model.entity.Employee;
 import com.example.rr_company.repository.EmployeeMyBatisRepo;
 import com.example.rr_company.service.impl.EmployeeService;
@@ -51,4 +52,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteEmployee(Long id) {
         employeeMyBatisRepo.delete(id);
     }
-}
+
+    @Override
+    public List<EmployeeWithDepartmentAndPosition> getEmployeesWithDepartmentAndPosition() {
+            return employeeMyBatisRepo.getEmployeesWithDepartmentAndPosition();
+        }
+    }
+

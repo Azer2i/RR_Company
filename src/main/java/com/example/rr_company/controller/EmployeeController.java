@@ -4,6 +4,7 @@ import com.example.rr_company.model.dto.request.EmployeeRequest;
 import com.example.rr_company.model.dto.response.EmployeeResponse;
 //import com.example.rr_company.model.request.EmployeeRequest;
 //import com.example.rr_company.model.response.EmployeeResponse;
+import com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition;
 import com.example.rr_company.service.impl.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,12 @@ public class EmployeeController {
                                                 @RequestBody EmployeeRequest employeeRequest) {
         employeeService.UpdateEmployee(id, employeeRequest);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/with-department-and-position")
+    public ResponseEntity<List<EmployeeWithDepartmentAndPosition>> getEmployeeWithDepartmentAndPosition() {
+        List<EmployeeWithDepartmentAndPosition> employees = employeeService.getEmployeesWithDepartmentAndPosition();
+        return  ResponseEntity.ok(employees);
     }
 
     }

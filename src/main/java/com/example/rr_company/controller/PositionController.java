@@ -43,10 +43,10 @@ public class PositionController {
         positionService.deletePosition(position);
         return ResponseEntity.ok().build();
     }
-//    @GetMapping("/full-data")
-//    public List<Position> getAllPositionsWithDepartments(){
-//        return positionService.getPositionsWithDepartments();
-//    }
+    @GetMapping("/full-data")
+    public List<Position> getAllPositionsWithDepartments(){
+        return positionService.getPositionsWithDepartments();
+    }
 
 }
 

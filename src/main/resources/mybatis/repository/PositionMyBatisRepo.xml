@@ -7,7 +7,7 @@
 
     <select id="getAllPosition" resultType="Position">
         SELECT <include refid="PositionColumns"></include>
-         FROM positions p;
+         FROM positions p
     </select>
 
     <select id="findByIdPosition" resultType="Position">
@@ -32,7 +32,7 @@
     </insert>
 
     <update id="update">
-        UPDATE crud.positions p
+        UPDATE positions p
         SET p.name =#{name,jdbcType=NVARCHAR} ,
             p.salary =#{salary} ,
             p.created_at=#{created_at},
@@ -44,17 +44,33 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM crud.positions p
+        DELETE FROM positions p
         <where>
             p.id = #{id}
         </where>
     </delete>
-    
-    <select id="getPositionWithDepartment" resultType="Position">
-        SELECT position.*, department.name AS department_name, department.created_at, department.updated_at
-        FROM position
-        INNER JOIN department ON position.department_id = department.id
+    <select id="getPositionWithDepartment" resultType="com.example.rr_company.model.dto.util.InnerUtil">
+        SELECT
+            positions.id,
+            positions.name,
+            positions.salary,
+            positions.created_at,
+            positions.updated_at,
+            department.id AS departmentId,
+            department.name AS departmentName,
+            department.created_at AS departmentCreatedAt,
+            department.updated_at AS departmentUpdatedAt
+        FROM
+            positions
+                INNER JOIN
+            department ON positions.department_id = department.id
     </select>
+    
+<!--    <select id="getPositionWithDepartment" resultType="Position">-->
+<!--        SELECT positions.*, department.name AS department_name, department.created_at, department.updated_at-->
+<!--        FROM positions-->
+<!--        INNER JOIN department ON positions.department_id = department.id-->
+<!--    </select>-->
 
 
 
