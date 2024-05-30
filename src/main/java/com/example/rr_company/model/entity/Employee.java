@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 @Data
 @Builder
@@ -18,6 +19,6 @@ public class Employee {
     private Long department_id;
     private Long position_id;
     public String status;
-    public Date created_at;
-    public Date updated_at;
+    public LocalDateTime created_at;
+    public LocalDateTime updated_at;
 }
