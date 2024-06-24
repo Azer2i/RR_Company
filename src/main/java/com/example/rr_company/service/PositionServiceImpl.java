@@ -6,6 +6,7 @@ import com.example.rr_company.model.dto.response.PositionResponse;
 //import com.example.rr_company.model.request.PositionRequest;
 //import com.example.rr_company.model.response.PositionResponse;
 import com.example.rr_company.model.entity.Position;
+import com.example.rr_company.model.entity.Wrapper;
 import com.example.rr_company.repository.PositionMyBatisRepo;
 import com.example.rr_company.service.impl.PositionService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -24,16 +24,17 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public List<PositionResponse> getAllPosition() {
-        List<Position> allPosition = positionMyBatisRepo.getAllPosition();
-        List<PositionResponse> positions = mapperPosition.toPositions(allPosition);
-        return positions;
+        List<Wrapper> wrapperList= positionMyBatisRepo.getAllPosition();
+        List<PositionResponse> positionList = mapperPosition.toPositionList(wrapperList);
+        return  positionList;
+
 
     }
 
     @Override
     public PositionResponse getPositionById(Long id) {
-        Optional<Position> byIdPosition = positionMyBatisRepo.findByIdPosition(id);
-        return byIdPosition.map(mapperPosition::toPositionById).orElse(null);
+        Wrapper wrapper = positionMyBatisRepo.findByIdPosition(id);
+        return mapperPosition.toPositionById(wrapper);
 
     }
 
@@ -62,9 +63,9 @@ public class PositionServiceImpl implements PositionService {
 
     }
 
-    @Override
-    public List<Position> getPositionsWithDepartments() {
-        return positionMyBatisRepo.getPositionWithDepartment();
-    }
+//    @Override
+//    public List<Position> getPositionsWithDepartments() {
+//        return positionMyBatisRepo.getPositionWithDepartment();
+//    }
 
 }

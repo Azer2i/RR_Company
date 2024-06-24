@@ -7,6 +7,7 @@ import com.example.rr_company.model.dto.response.PositionResponse;
 import com.example.rr_company.model.entity.Position;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PositionService {
     List<PositionResponse> getAllPosition();
@@ -14,6 +15,6 @@ public interface PositionService {
     void addPosition(PositionRequest positionRequest);
     void updatePosition(Long id,PositionRequest positionRequest);
     void deletePosition(Long id);
-    List<Position> getPositionsWithDepartments();
+//    List<Position> getPositionsWithDepartments();
 
 }

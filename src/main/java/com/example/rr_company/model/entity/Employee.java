@@ -15,10 +15,10 @@ public class Employee {
     private Long id;
     private String name;
     private String surname;
-    private String e_mail;
-    private Long department_id;
-    private Long position_id;
+    private String email;
+    private Long departmentId;
+    private Long positionId;
     public String status;
-    public LocalDateTime created_at;
-    public LocalDateTime updated_at;
+    public LocalDateTime createdAt;
+    public LocalDateTime updatedAt;
 }

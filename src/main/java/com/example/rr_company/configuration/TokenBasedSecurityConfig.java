@@ -25,8 +25,18 @@ public class TokenBasedSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         authManager -> authManager
-                                .anyRequest()
+                                .requestMatchers(
+                                        "/user/register",
+                                        "/user/login",
+                                        "/swagger-ui/index.html",
+                                        "/test/web-flux",
+                                        "/test/web-flux-post",
+                                        "/v3/api-docs/**",
+                                        "/v3/api-docs.yaml",
+                                        "/swagger-ui/**")
                                 .permitAll()
+                                .anyRequest()
+                                .authenticated()
                 )
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

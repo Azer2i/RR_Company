@@ -14,10 +14,10 @@ import java.util.Date;
 public class EmployeeRequest {
     private String name;
     private String surname;
-    private String e_mail;
-    private Long department_id;
-    private Long position_id;
+    private String email;
+    private Long departmentId;
+    private Long positionId;
     public String status;
-    public Date created_at;
-    public Date updated_at;
+    public Date createdAt;
+    public Date updatedAt;
 }

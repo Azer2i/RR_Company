@@ -10,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.Timer;
 
 @Data
 @Builder
@@ -24,8 +22,7 @@ public class User implements UserDetails {
     private String name;
     private String surname;
     private Timestamp createdAt;
-    private Timestamp lastLogin;
-    private Long userId;
+    private Timestamp lastlogin;  // lastLogin yerine lastlogin kullanıyoruz
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -61,8 +58,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
-
-
 }

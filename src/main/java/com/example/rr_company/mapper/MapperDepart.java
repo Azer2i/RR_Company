@@ -19,11 +19,9 @@ public interface MapperDepart {
 
     List<DepartmentResponse> toDepartmentResponse(List<Department> departments);
     DepartmentResponse toDepartmentResponseId(Department department);
-    @Mapping(target = "created_at",expression = "java(LocalDateTime.now())")
+    @Mapping(target = "createdAt",expression = "java(LocalDateTime.now())")
     Department toDepartment(DepartmentRequest departmentRequest);
-    @Mapping(target = "updated_at",expression = "java(LocalDateTime.now())")
-
-
+    @Mapping(target = "updatedAt",expression = "java(LocalDateTime.now())")
 
     Department toDepartmentById(Long departmentId,DepartmentRequest departmentRequest);
 

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +14,7 @@ import java.util.Date;
 public class PositionRequest {
     private String name;
     private Integer salary;
-    private Date created_at;
-    private Date updated_at;
-    private int department_id;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private int departmentId;
 }

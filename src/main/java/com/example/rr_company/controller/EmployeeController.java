@@ -2,9 +2,6 @@ package com.example.rr_company.controller;
 
 import com.example.rr_company.model.dto.request.EmployeeRequest;
 import com.example.rr_company.model.dto.response.EmployeeResponse;
-//import com.example.rr_company.model.request.EmployeeRequest;
-//import com.example.rr_company.model.response.EmployeeResponse;
-import com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition;
 import com.example.rr_company.service.impl.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +21,8 @@ public class EmployeeController {
         return ResponseEntity.ok(getAlls);
     }
 
-    @GetMapping("/id/{id}")
-    public ResponseEntity<EmployeeResponse> getEmployeeById(@PathVariable Long id) {
+    @GetMapping("/id/{employerId}")
+    public ResponseEntity<EmployeeResponse> getEmployeeById(@PathVariable("employerId") Long id) {
         EmployeeResponse employeeById = employeeService.findEmployeeById(id);
         return ResponseEntity.ok(employeeById);
     }
@@ -42,12 +39,17 @@ public class EmployeeController {
         employeeService.UpdateEmployee(id, employeeRequest);
         return ResponseEntity.ok().build();
     }
-
-    @GetMapping("/with-department-and-position")
-    public ResponseEntity<List<EmployeeWithDepartmentAndPosition>> getEmployeeWithDepartmentAndPosition() {
-        List<EmployeeWithDepartmentAndPosition> employees = employeeService.getEmployeesWithDepartmentAndPosition();
-        return  ResponseEntity.ok(employees);
+    @DeleteMapping("/employeeId/{employee}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable("employee") Long employee) {
+        employeeService.deleteEmployee(employee);
+        return ResponseEntity.ok().build();
     }
 
-    }
+//    @GetMapping("/with-department-and-position")
+//    public ResponseEntity<List<EmployeeWithDepartmentAndPosition>> getEmployeeWithDepartmentAndPosition() {
+//        List<EmployeeWithDepartmentAndPosition> employees = employeeService.getEmployeesWithDepartmentAndPosition();
+//        return  ResponseEntity.ok(employees);
+//    }
+
+}
 

@@ -1,6 +1,7 @@
 package com.example.rr_company.repository;
 
-import com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition;
+//import com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition;
+import com.example.rr_company.model.entity.EmpWrapper;
 import com.example.rr_company.model.entity.Employee;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,13 +12,13 @@ import java.util.Optional;
 
 @Mapper
 public interface EmployeeMyBatisRepo {
-    List<Employee> findAll();
+    List<EmpWrapper> findAll();
 
-    Optional<Employee> getByEmployeeId(@Param("id")Long id);
+    EmpWrapper getByEmployeeId(@Param("id")Long id);
 
     void insert(Employee employee);
     void update(Employee employee);
     void delete(@Param("id")Long id);
 
-    List<EmployeeWithDepartmentAndPosition> getEmployeesWithDepartmentAndPosition();
+//    List<EmployeeWithDepartmentAndPosition> getEmployeesWithDepartmentAndPosition();
 }

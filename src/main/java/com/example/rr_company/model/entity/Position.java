@@ -16,8 +16,8 @@ public class Position {
     private int id;
     private String name;
     private Integer salary;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
-    private int department_id;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private int departmentId;
 
 }

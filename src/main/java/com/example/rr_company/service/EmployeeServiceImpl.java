@@ -5,7 +5,8 @@ import com.example.rr_company.model.dto.request.EmployeeRequest;
 import com.example.rr_company.model.dto.response.EmployeeResponse;
 //import com.example.rr_company.model.request.EmployeeRequest;
 //import com.example.rr_company.model.response.EmployeeResponse;
-import com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition;
+//import com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition;
+import com.example.rr_company.model.entity.EmpWrapper;
 import com.example.rr_company.model.entity.Employee;
 import com.example.rr_company.repository.EmployeeMyBatisRepo;
 import com.example.rr_company.service.impl.EmployeeService;
@@ -14,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -25,15 +25,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeResponse> allEmployee() {
-        List<Employee> getAll = employeeMyBatisRepo.findAll();
-        List<EmployeeResponse> employeeResponse = mapperEmployee.toEmployeeResponse(getAll);
+        List<EmpWrapper> wrapperList = employeeMyBatisRepo.findAll();
+        List<EmployeeResponse> employeeResponse = mapperEmployee.toEmployeeResponses(wrapperList);
         return employeeResponse;
     }
 
     @Override
     public EmployeeResponse findEmployeeById(Long id) {
-        Optional<Employee> byEmployeeId = employeeMyBatisRepo.getByEmployeeId(id);
-        return byEmployeeId.map(mapperEmployee::toEmployeeResponseById).orElse(null);
+        EmpWrapper empWrapper = employeeMyBatisRepo.getByEmployeeId(id);
+        return mapperEmployee.toEmployeeResponse(empWrapper);
+
     }
 
     @Override
@@ -53,9 +54,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMyBatisRepo.delete(id);
     }
 
-    @Override
-    public List<EmployeeWithDepartmentAndPosition> getEmployeesWithDepartmentAndPosition() {
-            return employeeMyBatisRepo.getEmployeesWithDepartmentAndPosition();
-        }
+//    @Override
+//    public List<EmployeeWithDepartmentAndPosition> getEmployeesWithDepartmentAndPosition() {
+//            return employeeMyBatisRepo.getEmployeesWithDepartmentAndPosition();
+//        }
     }
 

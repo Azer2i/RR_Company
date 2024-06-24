@@ -16,8 +16,8 @@ import java.util.Date;
 public class Department {
     private Long id;
     private String name;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 
 }

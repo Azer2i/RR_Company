@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Mapper
 public interface DepartmentMyBatisRepo {
-   List<Department> FindAll();
-   Optional<Department> FindById(@Param("id")Long id);
+   List<Department> findAll();
+   Optional<Department> findById(@Param("id")Long id);
    void insert(Department department);
    void update(Department department);
    void delete(@Param("id")Long id);

@@ -4,14 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.rr_company.repository.EmployeeMyBatisRepo">
 
-    <select id="findAll" resultType="Employee">
-        SELECT <include refid="EmployeeColumns"></include>
-        FROM employee e;
+    <select id="findAll" resultType="EmpWrapper">
+        SELECT <include refid="appWrapperColumns"></include>
+        from employee e
+         Left Join department d
+        On e.departmentId = d.id
+        Left Join positions p
+        On e.positionId = p.id
     </select>
 
-    <select id="getByEmployeeId" resultType="Employee">
-        SELECT <include refid="EmployeeColumns"></include>
-        FROM employee e
+    <select id="getByEmployeeId" resultType="EmpWrapper">
+        SELECT <include refid="appWrapperColumns"></include>
+        from employee e
+        Left Join positions p
+        On e.positionId = p.id
+        Left Join department d
+        On e.departmentId = d.id
         <where>
             e.id = #{id}
         </where>
@@ -20,22 +28,22 @@
     <insert id="insert">
         INSERT INTO employee(name,
                              surname,
-                             e_mail,
-                             department_id,
-                             position_id,
+                             email,
+                             departmentId,
+                             positionId,
                              status,
-                             created_at,
-                             updated_at
+                             createdAt,
+                             updatedAt
         )
         values(
                #{name, jdbcType=NVARCHAR},
                #{surname, jdbcType=NVARCHAR},
-               #{e_mail},
-               #{department_id},
-               #{position_id},
+               #{email},
+               #{departmentId},
+               #{positionId},
                #{status},
-               #{created_at},
-               #{updated_at}
+               #{createdAt},
+               #{updatedAt}
               )
     </insert>
 
@@ -55,43 +63,62 @@
         </where>
     </delete>
 
-    <select id="getEmployeesWithDepartmentAndPosition" resultType="com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition">
-        SELECT
-            e.id,
-            e.name,
-            e.surname,
-            e.e_mail,
-            e.status,
-            e.created_at,
-            e.updated_at,
-            d.id AS departmentId,
-            d.name AS departmentName,
-            d.created_at AS departmentCreatedAt,
-            d.updated_at AS departmentUpdatedAt,
-            p.id AS positionId,
-            p.name AS positionName,
-            p.salary AS positionSalary,
-            p.created_at AS positionCreatedAt,
-            p.updated_at AS positionUpdatedAt
-        FROM
-            employee e
-                INNER JOIN
-            department d ON e.department_id = d.id
-                INNER JOIN
-            positions p ON e.position_id = p.id;
-    </select>
+<!--    <select id="getEmployeesWithDepartmentAndPosition" resultType="com.example.rr_company.model.dto.util.EmployeeWithDepartmentAndPosition">-->
+<!--        SELECT-->
+<!--            e.id,-->
+<!--            e.name,-->
+<!--            e.surname,-->
+<!--            e.email,-->
+<!--            e.status,-->
+<!--            e.created_at,-->
+<!--            e.updated_at,-->
+<!--            d.id AS departmentId,-->
+<!--            d.name AS departmentName,-->
+<!--            d.created_at AS departmentCreatedAt,-->
+<!--            d.updated_at AS departmentUpdatedAt,-->
+<!--            p.id AS positionId,-->
+<!--            p.name AS positionName,-->
+<!--            p.salary AS positionSalary,-->
+<!--            p.created_at AS positionCreatedAt,-->
+<!--            p.updated_at AS positionUpdatedAt-->
+<!--        FROM-->
+<!--            employee e-->
+<!--                INNER JOIN-->
+<!--            department d ON e.department_id = d.id-->
+<!--                INNER JOIN-->
+<!--            positions p ON e.position_id = p.id;-->
+<!--    </select>-->
 
 
     <sql id="EmployeeColumns">
                e.id,
                e.name,
                e.surname,
-               e.e_mail,
-               e.department_id,
-               e.position_id,
+               e.email,
+               e.departmentId,
+               e.positionId,
                e.status,
-               e.created_at,
-               e.updated_at
+               e.createdAt,
+               e.updatedAt
+
+    </sql>
+    <sql id="appWrapperColumns">
+                   e.id as emp_id,
+				   e.name as emp_name,
+                   e.surname as emp_surname,
+                   e.email as emp_email,
+                   e.status as emp_status,
+                   e.createdAt as emp_created_at,
+                   e.updatedAt as emp_updated_at,
+                   p.id as p_id,
+                   p.name as p_name,
+                   p.salary as p_salary,
+                   p.createdAt as p_created_at,
+                   p.updatedAt as p_updated_at,
+                   d.id as d_id,
+                   d.name as d_name,
+                   d.createdAt as d_created_at,
+                   d.updatedAt as d_updated_at
 
     </sql>
 

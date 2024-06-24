@@ -23,7 +23,7 @@ public class DepartmentServiceImpl implements DepartService {
 
     @Override
     public List<DepartmentResponse> getAllDepartments() {
-        List<Department> departments = departmentMyBatisRepo.FindAll();
+        List<Department> departments = departmentMyBatisRepo.findAll();
         List<DepartmentResponse> departmentResponse = mapperDepart.toDepartmentResponse(departments);
         return departmentResponse;
 
@@ -32,7 +32,7 @@ public class DepartmentServiceImpl implements DepartService {
 
     @Override
     public DepartmentResponse getDepartmentById(Long id) {
-        Optional<Department> departmentOptional = departmentMyBatisRepo.FindById(id);
+        Optional<Department> departmentOptional = departmentMyBatisRepo.findById(id);
         return departmentOptional.map(mapperDepart::toDepartmentResponseId).orElse(null);
     }
 

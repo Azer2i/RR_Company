@@ -5,14 +5,18 @@
 
 <mapper namespace="com.example.rr_company.repository.PositionMyBatisRepo">
 
-    <select id="getAllPosition" resultType="Position">
-        SELECT <include refid="PositionColumns"></include>
-         FROM positions p
+    <select id="getAllPosition" resultType="Wrapper">
+        Select <include refid="appWrapperColumns"></include>
+        from positions p
+        Left Join crud.department d
+        On p.departmentId = d.id
     </select>
 
-    <select id="findByIdPosition" resultType="Position">
-        SELECT <include refid="PositionColumns"></include>
-        FROM positions p
+    <select id="findByIdPosition" resultType="Wrapper">
+        Select <include refid="appWrapperColumns"></include>
+        from positions p
+        Left Join crud.department d
+        On p.departmentId = d.id
         <where>
             p.id = #{id}
         </where>
@@ -21,23 +25,23 @@
     <insert id="insert">
         INSERT INTO positions(name,
                               salary,
-                              created_at,
-                              updated_at,
-                              department_id)
+                              createdAt,
+                              updatedAt,
+                              departmentId)
         VALUES(#{name,jdbcType=NVARCHAR},
                #{salary},
-               #{created_at},
-               #{updated_at},
-               #{department_id})
+               #{createdAt},
+               #{updatedAt},
+               #{departmentId})
     </insert>
 
     <update id="update">
         UPDATE positions p
         SET p.name =#{name,jdbcType=NVARCHAR} ,
             p.salary =#{salary} ,
-            p.created_at=#{created_at},
-            p.updated_at=#{updated_at},
-            p.department_id=#{department_id}
+            p.createdAt=#{createdAt},
+            p.updatedAt=#{updatedAt},
+            p.departmentId=#{departmentId}
        <where>
            p.id=#{id}
        </where>
@@ -49,28 +53,34 @@
             p.id = #{id}
         </where>
     </delete>
-    <select id="getPositionWithDepartment" resultType="com.example.rr_company.model.dto.util.InnerUtil">
-        SELECT
-            positions.id,
-            positions.name,
-            positions.salary,
-            positions.created_at,
-            positions.updated_at,
-            department.id AS departmentId,
-            department.name AS departmentName,
-            department.created_at AS departmentCreatedAt,
-            department.updated_at AS departmentUpdatedAt
-        FROM
-            positions
-                INNER JOIN
-            department ON positions.department_id = department.id
-    </select>
     
-<!--    <select id="getPositionWithDepartment" resultType="Position">-->
-<!--        SELECT positions.*, department.name AS department_name, department.created_at, department.updated_at-->
-<!--        FROM positions-->
-<!--        INNER JOIN department ON positions.department_id = department.id-->
+<!--    <select id="findBydepartment">-->
+<!--        Select <include refid="appWrapperColumns"></include>-->
+<!--        from positions p-->
+<!--        Left Join crud.department d-->
+<!--        On p.departmentId = d.id-->
+<!--        <where>-->
+<!--        p.id = #{id}-->
+<!--        </where>-->
 <!--    </select>-->
+<!--    <select id="getPositionWithDepartment" resultType="com.example.rr_company.model.dto.util.InnerUtil">-->
+<!--        SELECT-->
+<!--            positions.id,-->
+<!--            positions.name,-->
+<!--            positions.salary,-->
+<!--            positions.createdAt,-->
+<!--            positions.updatedAt,-->
+<!--            department.id AS departmentId,-->
+<!--            department.name AS departmentName,-->
+<!--            department.createdAt AS departmentCreatedAt,-->
+<!--            department.updatedAt AS departmentUpdatedAt-->
+<!--        FROM-->
+<!--            positions-->
+<!--                INNER JOIN-->
+<!--            department ON positions.departmentId = department.id-->
+<!--    </select>-->
+    
+
 
 
 
@@ -78,10 +88,28 @@
             p.id,
             p.name,
             p.salary,
-            p.created_at,
-            p.updated_at,
-            p.department_id
+            p.createdAt,
+            p.updatedAt,
+            p.departmentId
         </sql>
+
+    <sql id="appWrapperColumns">
+            p.id as pid,
+            p.name as pname,
+            p.salary as psalary,
+            p.createdAt as pcreatedAt,
+            p.updatedAt as pupdatedAt,
+             d.id as did,
+            d.name as dname,
+            d.createdAt as dcreatedAt,
+            d.updatedAt as dupdatedAt
+    </sql>
+
+
+
+
+
+
     
     
     

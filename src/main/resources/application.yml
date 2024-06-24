@@ -1,5 +1,5 @@
 server:
-  port: 4343
+  port: 5335
 
 spring:
   datasource:
@@ -13,5 +13,5 @@ mybatis:
   type-aliases-package: com.example.rr_company.model.entity
 
 security:
-  secret-key: ui4woWU7Cfda2dUk02f3mDd6IrMHZQ4oNF324dakdl
-  expiration: 300000 #1000*60*5
+  secret-key: CgTOA2QC9nxYspeBZBRsEIoDmsBbGTjfDCE6WfnOHHrA7rgHafqC5u1m6GL22pNY
+  expiration: 30000000 #1000*60*5

@@ -1,5 +1,7 @@
 package com.example.rr_company.model.dto.response;
 
+import com.example.rr_company.model.entity.Department;
+import com.example.rr_company.model.entity.Position;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,10 +19,10 @@ public class EmployeeResponse {
     private Long id;
     private String name;
     private String surname;
-    private String e_mail;
-    private Long department_id;
-    private Long position_id;
+    private String email;
+    private DepartmentResponse department;
+    private PositionResponse position;
     public String status;
-    public LocalDateTime created_at;
-    public LocalDateTime updated_at;
+    public LocalDateTime createdAt;
+    public LocalDateTime updatedAt;
 }
